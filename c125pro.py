@@ -6,7 +6,12 @@ from sklearn.linear_model import LogisticRegression
 from PIL import Image
 import PIL.ImageOps
 
-X,y=fetch_openml('mnist_784',version=1,return_X_y=True)
+X=np.load('image.npz')['arr_0']
+y=pd.read_csv('labels.csv')['labels']
+print(pd.Series(y).value_counts())
+classes=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+nclasses=len(classes)
+
 x_train,x_test,y_train,y_test=train_test_split(X,y,random_state=9,train_size=7500,test_size=2500)
 
 x_train_scaled=x_train/255.0
